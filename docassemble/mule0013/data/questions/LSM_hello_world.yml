@@ -1,0 +1,38 @@
+---
+# My first Docassemble program
+mandatory: True
+question: Hello World!
+subquestion: |
+  #### Welcome to my first ever Docassemble interview
+  
+  Today I learnt:
+  
+  - what a mandatory code block is;
+  - how to use a variable; and
+  - a *little bit* of Markdown
+  
+  I, **${ LSMfname + ' ' + LSMlname }**, and I am ${ LSMage } years old!
+  
+  Column1|Column2
+  -------|-------
+  Full Name|${ LSMsalutation + ' ' + LSMfname + ' ' + LSMlname }
+  Age|${ LSMage }
+buttons:
+  - Exit: exit
+    url: https://flinders.edu.au
+  - Restart: restart
+---
+question: Name
+subquestion: |
+  Please enter your full name and age
+fields:
+  - Salutation: LSMsalutation
+    choices:
+      - Dr
+      - Mr
+      - Mrs
+      - Ms
+  - First Name: LSMfname
+  - Last Name: LSMlname
+  - Age: LSMage
+---
