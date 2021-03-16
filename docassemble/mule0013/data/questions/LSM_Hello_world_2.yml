@@ -1,0 +1,29 @@
+---
+# My first Docassemble program
+mandatory: True
+question: Hello World!
+subquestion: |
+  Hello **${ LSMfname + ' ' + LSMlname }**, ${ LSMstring }
+  
+buttons:
+  - Exit: exit
+    url: https://flinders.edu.au
+  - Restart: restart
+---
+code: |
+  if LSMage < 18:
+    LSMstring = "you are just a child!"
+  elif 18<= LSMage < 50:
+    LSMstring = "you are an adult."
+  elif LSMage > 65:
+    LSMstring = "you are an adult and are eligible for the age pension"
+---
+question: Name
+subquestion: |
+  Please enter your full name and age
+fields:
+  - First Name: LSMfname
+  - Last Name: LSMlname
+  - Age: LSMage
+    datatype: integer
+---

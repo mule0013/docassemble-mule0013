@@ -45,7 +45,7 @@ def find_package_data(where='.', package='', exclude=standard_exclude, exclude_d
 setup(name='docassemble.mule0013',
       version='0.0.1',
       description=('A docassemble extension.'),
-      long_description='# docassemble.mule0013\n\nA docassemble extension.\n\n## Author\n\nLiam Mules, mule0013@flinders.edu.au\n\n',
+      long_description='# docassemble.mule0013\r\n\r\nA docassemble extension.\r\n\r\n## Author\r\n\r\nLiam Mules, mule0013@flinders.edu.au\r\n\r\n',
       long_description_content_type='text/markdown',
       author='Liam Mules',
       author_email='mule0013@flinders.edu.au',
