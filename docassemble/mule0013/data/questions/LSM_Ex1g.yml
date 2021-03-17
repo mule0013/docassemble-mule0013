@@ -1,0 +1,64 @@
+---
+# My first Docassemble program
+mandatory: True
+question: Hello World!
+subquestion: |
+  Hello **${ LSMfname + ' ' + LSMlname }**
+  
+  % if LSMhaspartner == 'Yes':
+  Your partner's name is ${ LSMpartner }
+  % endif
+  
+  Your annual income is ${ LSMai } 
+  % if LSMhaspartner == 'Yes': 
+  and ${ LSMpartner }'s income is ${ currency(LSMpartnerincome) }
+  
+  Your total household income is ${ currency(LSMincome + LSMpartnerincome) }
+  
+  Your average household income is ${ currency((LSMincome+LSMpartnerincome)/2) }
+  % endif
+buttons:
+  - Exit: exit
+    url: https://flinders.edu.au
+  - Restart: restart
+---
+code: |
+  if LSM < 18:
+    LSMstring = "you are just a child!"
+  elif 18<= LSMage < 50:
+    LSMstring = "you are an adult."
+  elif LSMage > 65:
+    LSMstring = "you are an adult and are eligible for the age pension"
+---
+code: |
+  if LSMincome > 0:
+    LSMai = currency(LSMincome)
+  else:
+    LSMai = "0"
+---
+question: Name and Income
+fields:
+  - First Name: LSMfname
+  - Last Name: LSMlname
+  - Age: LSMage
+    datatype: integer
+  - What is your {Annual income}?: LSMincome
+    datatype: currency
+  - Do you have a partner?: LSMhaspartner
+    datatype: radio
+    choices:
+      - Yes
+      - No
+  - What is your partners name?: LSMpartner 
+    show if: 
+      variable: LSMhaspartner
+      is: 'Yes'
+  - What is your partners income?: LSMpartnerincome
+    datatype: currency
+    show if:  
+      variable: LSMhaspartner
+      is: 'Yes'
+terms:
+  Annual income: |
+    Your annual income is total value of income earned during a fiscal year
+---
