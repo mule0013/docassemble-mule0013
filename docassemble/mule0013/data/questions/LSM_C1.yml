@@ -1,0 +1,136 @@
+---
+objects:
+  - endpoint: DADict
+---
+# My first Docassemble program
+mandatory: True
+question: Assessment C1 2020 S2
+subquestion: |
+  Hello and welcome, this application will complete a federal court form 1 document. 
+  
+  ***Disclaimer:***  
+  **This advice is not to be taken as genuine legal advice and is not a substitute for you seeking independent legal advice.**
+
+  If you continue you accept these terms.
+buttons:
+  - "I do not accept": exit
+    url: http://www.courts.sa.gov.au/
+  - "I accept and want to continue": continue
+---
+mandatory: True
+code: |
+  if LSMok == True:
+    endpoint['ineligible']
+---
+mandatory: True
+question: Court file selection 
+fields:
+  - Please select your court file: target_variable
+    choices: 
+      - Supreme Court
+      - Magistrates Court
+      - District Court
+      - Federal Court
+      - Federal Circuit Court
+---
+code: |
+  if target_variable == 'Federal Court':
+    LSMok = False
+  elif target_variable == 'Federal Circuit Court':
+    LSMok = False
+  else:
+    LSMok = True
+---
+# This is the ineligible endpoint
+event: endpoint['ineligible']
+question: Eligibility requirements not met
+subquestion:
+  This application will only prepare forms for FCA and FCCT
+buttons:
+  - Exit: exit
+  - Restart: restart
+---
+mandatory: true
+question: Enter the two parties
+fields:
+  - Party One: LSMpone
+  - Party Two: LSMptwo
+---
+mandatory: true
+question: What is your district registry state?
+fields:
+  - District Registry: LSMstate
+---
+mandatory: true
+question: What is your division?
+fields:
+  - Division: LSMdivision
+    choices:
+    - Corporations
+    - Criminal
+    - Employment
+    - General
+---
+mandatory: true
+question: Applicant name
+fields:
+  - First Name: LSMafname
+  - Last Name: LSMalname
+---
+mandatory: true
+question: Respondent name
+fields:
+  - First Name: LSMrfname
+  - Last Name: LSMrlname
+---
+mandatory: true
+question: Todays date
+fields:
+  - Date: LSMdate
+    datatype: date
+---
+mandatory: true
+question: Todays date
+fields:
+  - Date: LSMdate
+    datatype: date
+---
+mandatory: true
+question: Lawyer details
+fields:
+  - Full name: LSMlawname
+  - Law firm: LSMfirm
+  - Tel: LSMtel
+  - Fax: LSMfax
+  - Email: LSMemail
+  - Address: LSMaddress
+---
+mandatory: true
+question: Thank you for completing your application
+subquestion: |
+  Please review your details:
+  
+  Information|Your Input
+  -----------|----------
+  Party One       | ${ LSMpone }
+  Party two       | ${ LSMptwo }
+  District state  | ${ LSMstate }
+  Division        | ${ LSMdivision }
+  Applicant Name  | ${ LSMafname } ${ LSMalname }
+  Respondent Name | ${ LSMrfname } ${ LSMrlname }
+  Date            | ${ LSMdate }
+  Lawyer Name     | ${ LSMlawname }
+  Lawyer Firm     | ${ LSMfirm }
+  Lawyer Tel      | ${ LSMtel }
+  Lawyer Fax      | ${ LSMfax }
+  Lawyer Email    | ${ LSMemail }
+  Lawyer Address  | ${ LSMaddress }
+attachment:
+  docx template file: FCA_form001_C1.docx
+  valid formats:
+    - pdf
+buttons:
+  - Exit: exit
+    url: http://www.courts.sa.gov.au/
+  - Restart: restart
+---
