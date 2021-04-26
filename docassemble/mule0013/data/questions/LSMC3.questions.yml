@@ -13,14 +13,14 @@ subquestion: |
 yesno: HAAeligible
 ---
 question: |
-  Do you identify as:
+  Gender:
 fields: 
   - no label: HAAgender
     datatype: radio
     choices:
      - "Female": female
      - "Male": male
-     - "Other/Prefer not to Specify": other
+     - "Other/Prefer not to specify": other
 ---
 question: |
   Do you have pets?

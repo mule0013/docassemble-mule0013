@@ -72,6 +72,7 @@ code: |
 # its client list
 code: |
   if HAAabor:
+    #and HAA_agencylist[i].item('indigenous') == True:
     # Test is always true if person identifies as ATSI
     HAA_agencylist[i]['atsi_test'] = True
   elif HAAabor == False and HAA_agencylist[i].item('indigenous') == False:

@@ -8,8 +8,10 @@ content: |
   ${ HAA_agencylist[i].item('blurb') } [BR]
 
 ---
+#these are the categories pets etc. 
 objects:
   HAAdisplay_pets: DAList.using(there_are_any=True, auto_gather=False)
+  HAAdisplay_aboriginal: DAList.using(there_are_any=True, auto_gather=False)
   HAAdisplay_other: DAList.using(there_are_any=True, auto_gather=False)
 ---
 # The following code blocks each extract a set of agencies
@@ -46,6 +48,26 @@ code: |
 ---
 # Other categories go here...
 # This is an exercise for students
+code: |
+  HAAdisplay_aboriginal.clear()
+  for HAAagency in HAAqualifying_agencies:
+  # Add if the test passes and it hasns't been printed yet
+    if HAAagency.item('printed') == True:
+      #do nothing because already printed
+      pass
+    elif HAAagency.item('atsi_test') == True and HAAagency.item('indigenous') == True:
+      #Add text to display in the display list
+      HAAdisplay_aboriginal.append(HAAagency)
+      #Mark as displayed
+      HAAagency['printed'] = True
+    else:
+      #Otherwise don't do anything
+      pass
+      
+  HAAdisplay_aboriginal.gathered = True
+  #mark as printed
+  #for HAAagency in HAAdisplay_aboriginal:
+    #HAAagency['printed'] = True
 ---
 # Finally, we display everything else.  Everything else
 # is every record in HAAqualifying_agencies that has
@@ -56,11 +78,12 @@ code: |
     # Only add if not yet printed
     if HAAagency.item('printed') == True:
       # Don't do anything if already printed
+      #HAAdisplay_other.append(HAAagency)
       pass
     else:
       HAAdisplay_other.append(HAAagency)
       HAAagency['printed'] = True
       # I used this for debugging
-      # HAAdisplay_other.append('printed: {}: attr_def: {} item(printed): {}[BR]'.format(HAAagency['service'], HAAagency.attribute_defined('printed'), HAAagency.item('printed')))  
+      #HAAdisplay_other.append('printed: {}: attr_def: {} item(printed): {}[BR]'.format(HAAagency['service'], HAAagency.attribute_defined('printed'), HAAagency.item('printed')))  
   HAAdisplay_other.gathered = True
 ---

@@ -77,6 +77,15 @@ subquestion:  |
   %endfor  
   % endif
   
+  % if HAAabor:
+  ### Services for Aboriginal Torres Straight Islanders
+
+  Contact these agencies to discuss options for Aboriginal   and Torres Straight Islanders
+
+  %for HAAdisplay_entry in HAAdisplay_aboriginal:
+  ${ HAAdisplay_entry['display_record'].show() }
+  %endfor  
+  % endif
 
   % if HAAfamily == 'Single':
   ### Services for you
